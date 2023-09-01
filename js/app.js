@@ -3,8 +3,8 @@
 
 
 //*STATE VARIABLES
-
-let coordinate, travelDirection, score, snakeLength, board
+let board = [];
+let coordinate, travelDirection, score, snakeLength  
 
 //*CACHED ELEMENT REFERENCES
 
@@ -17,10 +17,10 @@ const boardDiv = document.getElementById('board')
 init()
 
 function init() {
-  generateBoard()
+  generateBoardCells()
 }
 
-function generateBoard() {
+function generateBoardCells() {
   for (let i = 1; i < 21; i++) {
     for (let j = 1; j < 21; j++) {
       let cell = document.createElement('div')
@@ -31,7 +31,14 @@ function generateBoard() {
   }
 }
 
-console.log(generateBoard())
+function generateBoardArray() {
+  for (let i = 1; i < 21; i++) {
+    board.push([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+  }
+}
+
+generateBoardArray()
+console.log(board)
 
 // Create a grid of html elements that represent cells on the board using flexbox. 
 // Create state variables for X and Y coordinates, travelDirection(which way the snake is going), score, and snakeLength
