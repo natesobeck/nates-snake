@@ -1,0 +1,18 @@
+body {
+  height: 80vh;
+  width: 80vh;
+}
+
+#board {
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(20, 5%);
+  grid-template-rows: repeat(20, 5%);
+  overflow: hidden;
+}
+
+.boardCell {
+  border: 1px solid black;
+}`
