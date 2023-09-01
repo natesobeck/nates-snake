@@ -4,20 +4,37 @@
 
 //*STATE VARIABLES
 let board = [];
-let coordinate, travelDirection, score, snakeLength  
+let appleCoordinates, snakeCoordinates, travelDirection, score, snakeLength  
 
 //*CACHED ELEMENT REFERENCES
 
-const boardDiv = document.getElementById('board')
+const boardEl = document.getElementById('board')
+
+generateBoardCells()
+const boardCellEls = document.querySelectorAll('.boardCell')
+const snakeEls = ''
+const appleEl = ''
+const scoreEl = ''
+
+// console.log((boardCellEls[300].getAttribute('id').replace('boardCell', '').split('-')))
 
 //*EVENT LISTENERS
 
-//*FUNCIONS
+//*FUNCTIONS
 
 init()
 
 function init() {
-  generateBoardCells()
+  travelDirection = 'right'
+  snakeLength = 3
+  score = 0
+  render()
+}
+
+function render() {
+  generateBoardArray()
+  displayBoard()
+  moveSnake()
 }
 
 function generateBoardCells() {
@@ -26,7 +43,7 @@ function generateBoardCells() {
       let cell = document.createElement('div')
       cell.setAttribute('id', `boardCell${i}-${j}`)
       cell.className = 'boardCell'
-      boardDiv.appendChild(cell)
+      boardEl.appendChild(cell)
     }
   }
 }
@@ -37,8 +54,43 @@ function generateBoardArray() {
   }
 }
 
-generateBoardArray()
-console.log(board)
+
+function displayBoard() {
+  displayApple()
+  displaySnake()
+}
+
+function randomIndex() {
+  return Math.floor(Math.random() * 20)
+}
+
+function displayApple() {
+}
+
+function displaySnake() {
+}
+
+function moveSnake() {
+}
+
+function turnSnake() {
+}
+
+function eatApple() {
+}
+
+function incrementScore(score) {
+}
+
+function displayScore() {
+}
+
+function endGame() {
+}
+
+function displayResult() {
+}
+
 
 // Create a grid of html elements that represent cells on the board using flexbox. 
 // Create state variables for X and Y coordinates, travelDirection(which way the snake is going), score, and snakeLength
