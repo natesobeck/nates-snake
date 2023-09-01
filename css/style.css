@@ -23,8 +23,16 @@ body {
   overflow: hidden;
 }
 
+.snake {
+ background-color: green;
+}
+
 .cell {
   border: 1px solid black;
+}
+
+.apple {
+  background-color: red;
 }
 
 #score-display {
@@ -32,8 +40,4 @@ body {
   height: 30px;
   width: 130px;
   border: 1px solid black;
-}
-
-.apple {
-  background-color: red;
 }

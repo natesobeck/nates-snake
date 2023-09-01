@@ -4,7 +4,7 @@
 
 //*STATE VARIABLES
 let board = [];
-let xcoordinate, ycoordinate, appleCoordinates, snakeCoordinates, travelDirection, score, snakeLength  
+let appleCoordinates, snakeCoordinates, appleId, snakeIds, travelDirection, score, snakeLength
 
 //*CACHED ELEMENT REFERENCES
 
@@ -23,6 +23,7 @@ const scoreEl = ''
 init()
 
 function init() {
+  snakeCoordinates = [[10, 10], [10, 11], [10, 12]]
   travelDirection = 'right'
   snakeLength = 3
   score = 0
@@ -54,27 +55,38 @@ function generateBoardArray() {
 
 
 function displayBoard() {
-  displayApple()
   displaySnake()
+  displayApple()
 }
 
 function randomIndex() {
-  return Math.floor(Math.random() * 20)
+  const index = Math.floor(Math.random() * 20)
+  return index + 1
 }
 
 function displayApple() {
   appleCoordinates = [randomIndex(), randomIndex()]
-  const appleId = `cell${appleCoordinates[0]}-${appleCoordinates[1]}`
-  console.log(appleId)
+  appleId = `cell${appleCoordinates[0]}-${appleCoordinates[1]}`
   boardCellEls.forEach(cell => {
-    if (cell.getAttribute('id') === appleId) {
+    if (cell.getAttribute('id') === appleId && !snakeIds.includes(cell.getAttribute('id'))) {
       cell.className = 'apple'
     }
   })
 }
 
 function displaySnake() {
+  snakeIds = []
+  snakeCoordinates.forEach(segment => {
+    snakeIds.push(`cell${snakeCoordinates[snakeCoordinates.indexOf(segment)][0]}-${snakeCoordinates[snakeCoordinates.indexOf(segment)][1]}`)
+  })
+  boardCellEls.forEach(cell => {
+    if (snakeIds.includes(cell.getAttribute('id'))) {
+      cell.className = 'snake'
+    }
+  })
 }
+
+console.log(appleId)
 
 function moveSnake() {
 }
