@@ -4,19 +4,17 @@
 
 //*STATE VARIABLES
 let board = [];
-let appleCoordinates, snakeCoordinates, travelDirection, score, snakeLength  
+let xcoordinate, ycoordinate, appleCoordinates, snakeCoordinates, travelDirection, score, snakeLength  
 
 //*CACHED ELEMENT REFERENCES
 
 const boardEl = document.getElementById('board')
 
 generateBoardCells()
-const boardCellEls = document.querySelectorAll('.boardCell')
+const boardCellEls = document.querySelectorAll('.cell')
 const snakeEls = ''
 const appleEl = ''
 const scoreEl = ''
-
-// console.log((boardCellEls[300].getAttribute('id').replace('boardCell', '').split('-')))
 
 //*EVENT LISTENERS
 
@@ -41,8 +39,8 @@ function generateBoardCells() {
   for (let i = 1; i < 21; i++) {
     for (let j = 1; j < 21; j++) {
       let cell = document.createElement('div')
-      cell.setAttribute('id', `boardCell${i}-${j}`)
-      cell.className = 'boardCell'
+      cell.setAttribute('id', `cell${i}-${j}`)
+      cell.className = 'cell'
       boardEl.appendChild(cell)
     }
   }
@@ -65,6 +63,14 @@ function randomIndex() {
 }
 
 function displayApple() {
+  appleCoordinates = [randomIndex(), randomIndex()]
+  const appleId = `cell${appleCoordinates[0]}-${appleCoordinates[1]}`
+  console.log(appleId)
+  boardCellEls.forEach(cell => {
+    if (cell.getAttribute('id') === appleId) {
+      cell.className = 'apple'
+    }
+  })
 }
 
 function displaySnake() {
