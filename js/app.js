@@ -1,20 +1,36 @@
 //*CONSTANTS
 class Cell {
-  constructor(x, y, isApple, isSnake, direction) {
+  constructor(x, y, isApple, isSnake, isSnakeHead, direction) {
     this.x = x
     this.y = y
     this.isApple = isApple
     this.isSnake = isSnake
+    this.isSnakeHead = isSnakeHead
     this.direction = direction
   }
 }
+
+// class Apple {
+//   constructor(x, y) {
+//     this.cell = new Cell(x, y)
+//   }
+// }
+
+// class Snake {
+//   constructor(x, y) {
+//     this.head = new Cell(x, y)
+//     this.length = 3
+//     this.direction = 'left'
+//     this.body = [new Cell(x - 1, y), new Cell(x - 2, y)]
+//   }
+  
+// }
 
 //*STATE VARIABLES
 let board = [];
 let appleCoordinates, snakeCoordinates, score, snakeLength
 
 //*CACHED ELEMENT REFERENCES
-
 
 const boardEl = document.getElementById('board')
 generateBoardCells()
@@ -31,6 +47,8 @@ function init() {
   score = 0
   snakeLength = 3
   snakeCoordinates = [['10', '10'], ['10', '11'], ['10', '12']]
+  snakeHead = snakeCoordinates[0]
+  snakeHeadDirection = 'left'
   render()
 }
 
@@ -70,7 +88,7 @@ function generateBoardArray() {
       if (j < 10) {
         y = y.padStart(2, 0)
       }
-      let cell = new Cell (x, y, false, false, 'left')
+      let cell = new Cell (x, y, false, false, false, 'left')
       board.push(cell)
     }
   }
@@ -121,6 +139,7 @@ function displayApple() {
 }
 
 function displaySnake() {
+  const tempArray = []
   boardCellEls.forEach(displayedCell => {
     const cellId = displayedCell.getAttribute('id')
     const x = cellId[4] + cellId[5]
@@ -129,22 +148,29 @@ function displaySnake() {
       displayedCell.classList.remove('snake')
       displayedCell.className = 'cell'
     }
-    snakeCoordinates.forEach((coordinate)=> {
+    snakeCoordinates.forEach((coordinate, i)=> {
       if (coordinate[0] === x && coordinate[1] === y) {
         displayedCell.className = 'snake'
-        board.forEach(boardCell => {
+        board.forEach(boardCell=> {
           if (boardCell.x === x && boardCell.y === y) {
             boardCell.isSnake = true
-          } else {
-            boardCell.isSnake = false
+            tempArray.push(boardCell)
+            if(i === 0) {
+              boardCell.isSnakeHead = true
+            }
+            else {
+              boardCell.isSnakeHead = false
+            }
           }
         })
       }
     })
   })
-}
-
-function turnSnake() {
+  board.forEach(boardCell => {
+    if (!tempArray.includes(boardCell)) {
+      boardCell.isSnake = false
+    }
+  })
 }
 
 function moveSnake() {
@@ -171,6 +197,17 @@ function moveSnake() {
     }
   })
   displaySnake()
+}
+
+function setHeadDirction() {
+  board.forEach(cell => {
+    if (cell.isSnakeHead === true) {
+
+    }
+  })
+}
+
+function turnSnake() {
 }
 
 function eatApple() {
