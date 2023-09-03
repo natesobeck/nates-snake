@@ -1,20 +1,25 @@
 //*CONSTANTS
-
-
+class Cell {
+  constructor(x, y, isApple, isSnake, direction) {
+    this.x = x
+    this.y = y
+    this.isApple = isApple
+    this.isSnake = isSnake
+    this.direction = direction
+  }
+}
 
 //*STATE VARIABLES
 let board = [];
-let appleCoordinates, snakeCoordinates, appleId, snakeIds, travelDirection, score, snakeLength
+let appleCoordinates, snakeCoordinates, score, snakeLength
 
 //*CACHED ELEMENT REFERENCES
 
-const boardEl = document.getElementById('board')
 
+const boardEl = document.getElementById('board')
 generateBoardCells()
 const boardCellEls = document.querySelectorAll('.cell')
-const snakeEls = ''
-const appleEl = ''
-const scoreEl = ''
+const scoreEl = document.getElementById('score-display')
 
 //*EVENT LISTENERS
 
@@ -23,24 +28,32 @@ const scoreEl = ''
 init()
 
 function init() {
-  snakeCoordinates = [[10, 10], [10, 11], [10, 12]]
-  travelDirection = 'right'
-  snakeLength = 3
   score = 0
+  snakeLength = 3
+  snakeCoordinates = [['10', '10'], ['10', '11'], ['10', '12']]
   render()
 }
 
 function render() {
   generateBoardArray()
-  displayBoard()
+  displayApple()
+  displaySnake()
   moveSnake()
 }
 
 function generateBoardCells() {
   for (let i = 1; i < 21; i++) {
     for (let j = 1; j < 21; j++) {
-      let cell = document.createElement('div')
-      cell.setAttribute('id', `cell${i}-${j}`)
+      const cell = document.createElement('div')
+      let x = (i).toString()
+      let y = (j).toString()
+      if (i < 10) {
+        x = x.padStart(2, 0)
+      }
+      if (j < 10) {
+        y = y.padStart(2, 0)
+      }
+      cell.setAttribute('id', `cell${x}-${y}`)
       cell.className = 'cell'
       boardEl.appendChild(cell)
     }
@@ -49,14 +62,19 @@ function generateBoardCells() {
 
 function generateBoardArray() {
   for (let i = 1; i < 21; i++) {
-    board.push([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+    for (let j = 1; j < 21; j++) {
+      let x = (i).toString()
+      let y = (j).toString()
+      if (i < 10) {
+        x = x.padStart(2, 0)
+      }
+      if (j < 10) {
+        y = y.padStart(2, 0)
+      }
+      let cell = new Cell (x, y, null)
+      board.push(cell)
+    }
   }
-}
-
-
-function displayBoard() {
-  displaySnake()
-  displayApple()
 }
 
 function randomIndex() {
@@ -64,34 +82,102 @@ function randomIndex() {
   return index + 1
 }
 
-function displayApple() {
+function getAppleCoordinates() {
   appleCoordinates = [randomIndex(), randomIndex()]
-  appleId = `cell${appleCoordinates[0]}-${appleCoordinates[1]}`
-  boardCellEls.forEach(cell => {
-    if (cell.getAttribute('id') === appleId && !snakeIds.includes(cell.getAttribute('id'))) {
-      cell.className = 'apple'
+  board.find(cell => {
+    if (cell.snake === true &&
+      appleCoordinates[0] === cell.x &&
+      appleCoordinates[1] === cell.y) {
+        getAppleCoordinates()
+      }
+    })
+  let x = appleCoordinates[0].toString()
+  let y = appleCoordinates[1].toString()
+  if (x < 10) {
+    x = x.padStart(2, 0)
+  }
+  if (y < 10) {
+    y = y.padStart(2, 0)
+  }
+  appleCoordinates = [x, y]
+}
+
+function displayApple() {
+  getAppleCoordinates()
+  console.log(appleCoordinates)
+  boardCellEls.forEach(displayedCell => {
+    const cellId = displayedCell.getAttribute('id')
+    const x = cellId[4] + cellId[5]
+    const y = cellId[7] + cellId[8]
+    if (appleCoordinates[0] === x && appleCoordinates[1] === y) {
+      displayedCell.className = 'apple'
+      board.forEach(boardCell => {
+        if (boardCell.x === x && boardCell.y === y) {
+          boardCell.isApple = true
+        } else {
+          boardCell.isApple = false
+        }
+      })
     }
   })
 }
 
 function displaySnake() {
-  snakeIds = []
-  snakeCoordinates.forEach(segment => {
-    snakeIds.push(`cell${snakeCoordinates[snakeCoordinates.indexOf(segment)][0]}-${snakeCoordinates[snakeCoordinates.indexOf(segment)][1]}`)
+  boardCellEls.forEach(displayedCell => {
+    const cellId = displayedCell.getAttribute('id')
+    const x = cellId[4] + cellId[5]
+    const y = cellId[7] + cellId[8]
+    snakeCoordinates.forEach((coordinate)=> {
+      if (coordinate[0] === x && coordinate[1] === y) {
+        displayedCell.className = 'snake'
+        board.forEach(boardCell => {
+          if (boardCell.x === x && boardCell.y === y) {
+            boardCell.isSnake = true
+          } else {
+            boardCell.isSnake = false
+          }
+        })
+      }
+    })
   })
-  boardCellEls.forEach(cell => {
-    if (snakeIds.includes(cell.getAttribute('id'))) {
-      cell.className = 'snake'
-    }
-  })
-}
-
-console.log(appleId)
-
-function moveSnake() {
 }
 
 function turnSnake() {
+  snakeCoordinates.forEach((cellCoordinate, i)=> {
+    if (snake.direction[i] === 'left') {
+      //Move the cell left
+    } else if (snake.direction[i] === 'up') {
+      //Move the cell up
+    } else if (snake.direction[i] === 'right') {
+      //Move the cell right
+    } else {
+      //Move the cell down
+    }
+    snakeCoordinates[i] = [cellCoordinate[0], cellCoordinate[1] - 1]
+  })
+  snakeCoordinates.splice(snakeCoordinates.length, 1)
+  displaySnake()
+}
+
+function moveSnake() {
+  // if (travelDirection === 'left') {
+  //   snakeCoordinates.forEach(segment => {
+  //     snakeCoordinates[snakeCoordinates.indexOf(segment)] = [segment[0], segment[1] - 1]
+  //   })
+  // }
+  // } else if (travelDirection === 'right') {
+  //   snakeCoordinates.forEach(segment => {
+  //     snakeCoordinates[snakeCoordinates.indexOf(segment)] = [segment[0], segment[1] + 1]
+  //   })
+  // } else if (travelDirection === 'up') {
+  //   snakeCoordinates.forEach(segment => {
+  //     snakeCoordinates[snakeCoordinates.indexOf(segment)] = [segment[0] - 1, segment[1]]
+  //   })
+  // } else {
+  //   snakeCoordinates.forEach(segment => {
+  //     snakeCoordinates[snakeCoordinates.indexOf(segment)] = [segment[0] + 1, segment[1]]
+  //   })
+  // }
 }
 
 function eatApple() {

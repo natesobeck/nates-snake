@@ -1,7 +1,16 @@
-body {
-  height: 100vh;
-  width: 100vh;
+html {
   display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+body {
+  height: 90vmin;
+  width: 90vmin;
+  max-width: 800px;
+  max-height: 800px;
+  margin: 5vmin 0 0 5vmin;
+  background-color: rgb(95, 158, 160, 50%);
 }
 
 #game-container {
@@ -11,12 +20,16 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color:rgb(222, 184, 135, 80%);
+  border-style:inset;
+  border-radius: 5%;
 }
 
 #board {
-  height: 100%;
-  width: 100%;
-  border: 1px solid black;
+  height: 90%;
+  width: 90%;
+  border-style:ridge;
+  border-color: rgb(50, 169, 86, 60%);
   display: grid;
   grid-template-columns: repeat(20, 5%);
   grid-template-rows: repeat(20, 5%);
@@ -24,20 +37,29 @@ body {
 }
 
 .snake {
- background-color: green;
+  background-color: rgb(50, 169, 86);
+  border-radius: 25%;
+  border-style:ridge;
+  border-color: darkseagreen;
 }
 
 .cell {
-  border: 1px solid black;
+  border-style: ridge;
+  border-color: rgb(50, 169, 86, 60%);
 }
 
 .apple {
-  background-color: red;
+  background-color: rgb(139, 0, 0, 80%);
+  border-radius: 50%;
+  border-top-right-radius: 30%;
+  border-top-left-radius: 30%;
+  border-style: ridge;
+  border-color: rgb(205, 92, 92);
 }
 
-#score-display {
+/* #score-display {
   margin: 10px;
   height: 30px;
   width: 130px;
   border: 1px solid black;
-}
+} */
