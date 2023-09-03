@@ -38,7 +38,6 @@ function render() {
   generateBoardArray()
   displayApple()
   displaySnake()
-  moveSnake()
 }
 
 function generateBoardCells() {
@@ -71,7 +70,7 @@ function generateBoardArray() {
       if (j < 10) {
         y = y.padStart(2, 0)
       }
-      let cell = new Cell (x, y, null)
+      let cell = new Cell (x, y, false, false, 'left')
       board.push(cell)
     }
   }
@@ -104,7 +103,6 @@ function getAppleCoordinates() {
 
 function displayApple() {
   getAppleCoordinates()
-  console.log(appleCoordinates)
   boardCellEls.forEach(displayedCell => {
     const cellId = displayedCell.getAttribute('id')
     const x = cellId[4] + cellId[5]
@@ -127,6 +125,10 @@ function displaySnake() {
     const cellId = displayedCell.getAttribute('id')
     const x = cellId[4] + cellId[5]
     const y = cellId[7] + cellId[8]
+    if (appleCoordinates[0] !== x || appleCoordinates[1] !== y) {
+      displayedCell.classList.remove('snake')
+      displayedCell.className = 'cell'
+    }
     snakeCoordinates.forEach((coordinate)=> {
       if (coordinate[0] === x && coordinate[1] === y) {
         displayedCell.className = 'snake'
@@ -143,41 +145,32 @@ function displaySnake() {
 }
 
 function turnSnake() {
-  snakeCoordinates.forEach((cellCoordinate, i)=> {
-    if (snake.direction[i] === 'left') {
-      //Move the cell left
-    } else if (snake.direction[i] === 'up') {
-      //Move the cell up
-    } else if (snake.direction[i] === 'right') {
-      //Move the cell right
-    } else {
-      //Move the cell down
-    }
-    snakeCoordinates[i] = [cellCoordinate[0], cellCoordinate[1] - 1]
-  })
-  snakeCoordinates.splice(snakeCoordinates.length, 1)
-  displaySnake()
 }
 
 function moveSnake() {
-  // if (travelDirection === 'left') {
-  //   snakeCoordinates.forEach(segment => {
-  //     snakeCoordinates[snakeCoordinates.indexOf(segment)] = [segment[0], segment[1] - 1]
-  //   })
-  // }
-  // } else if (travelDirection === 'right') {
-  //   snakeCoordinates.forEach(segment => {
-  //     snakeCoordinates[snakeCoordinates.indexOf(segment)] = [segment[0], segment[1] + 1]
-  //   })
-  // } else if (travelDirection === 'up') {
-  //   snakeCoordinates.forEach(segment => {
-  //     snakeCoordinates[snakeCoordinates.indexOf(segment)] = [segment[0] - 1, segment[1]]
-  //   })
-  // } else {
-  //   snakeCoordinates.forEach(segment => {
-  //     snakeCoordinates[snakeCoordinates.indexOf(segment)] = [segment[0] + 1, segment[1]]
-  //   })
-  // }
+  board.forEach(cell => {
+    if (cell.isSnake === true) {
+      if (cell.direction === 'left') {
+        snakeCoordinates.forEach(coordinate => {
+          coordinate[1] = (parseInt(coordinate[1]) - 1).toString().padStart(2, 0)
+        })
+      } else if(cell.direction === 'up') {
+        snakeCoordinates.forEach(coordinate => {
+          coordinate[0] = (parseInt(coordinate[0]) - 1).toString().padStart(2, 0)
+          console.log(coordinate)
+        })
+      } else if(cell.direction === 'right') {
+        snakeCoordinates.forEach(coordinate => {
+          coordinate[1] = (parseInt(coordinate[1]) + 1).toString().padStart(2, 0)
+        })
+      } else {
+        snakeCoordinates.forEach(coordinate => {
+          coordinate[0] = (parseInt(coordinate[0]) + 1).toString().padStart(2, 0)
+        })
+      }
+    }
+  })
+  displaySnake()
 }
 
 function eatApple() {
