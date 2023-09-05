@@ -23,6 +23,12 @@ class Apple {
       const point = getCoordinates(displayedCell)
       if (point.x === this.coordinate.x && point.y === this.coordinate.y) {
         displayedCell.className = 'apple'
+      } else {
+        snake.coordinates.forEach(coordinate => {
+          if (point.x !== coordinate.x || point.y !== coordinate.y) {
+            displayedCell.className = 'cell'
+          }
+        })
       }
     })
   }
@@ -57,22 +63,14 @@ class Snake {
     }
     this.coordinates.unshift(cloneHead)
     this.coordinates.pop()
+    eatApple()
     clearBoard()
     checkForLoss()
     this.display()
   }
   moveContinuously() {
     const moveTimer = setInterval(this.moveOnce.bind(this), 200)
-    const lossCheckTimer = setInterval(checkForLoss(moveTimer, lossCheckTimer), 200)
   }
-  // eatApple() {
-  //   this.coordinates.forEach(coordinate => {
-  //     if (coordinate.x === apple.coordinate.x && coordinate.y === apple.coordinate.y) {
-  //       snake.coordinates.push(apple)
-  //     }
-  //     apple = new Apple()
-  //   })
-  // }
 }
 
 //*STATE VARIABLES
@@ -95,7 +93,6 @@ document.addEventListener('keydown', handleArrowKeydown)
 init()
 
 function init() {
-  apple = null
   score = 0
   snake = new Snake(10, 10)
   apple = new Apple()
@@ -186,10 +183,16 @@ function getCoordinates(displayedCell) {
   return newCell
 }
 
-function incrementScore(score) {
-}
-
-function displayScore() {
+function eatApple() {
+  let appleClone = Object.assign({}, apple.coordinate)
+  snake.coordinates.forEach(coordinate => {
+    if (coordinate.x === appleClone.x && coordinate.y === appleClone.y) {
+      apple.coordinate = apple.createUniqueCoordinates()
+      apple.display()
+      score += 10
+      console.log(score)
+    }
+  })
 }
 
 function checkForLoss(moveTimer, lossCheckTimer) {
@@ -205,7 +208,6 @@ function checkForLoss(moveTimer, lossCheckTimer) {
   })
   if (lostGame) {
     clearInterval(moveTimer)
-    clearInterval(lossCheckTimer)
   }
 }
 
