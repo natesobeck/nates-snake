@@ -67,14 +67,27 @@ class Snake {
     clearBoard()
     this.display()
   }
-  moveContinuously() {
-    const moveTimer = setInterval(this.moveOnce.bind(this), 200)
-  }
+  // moveContinuously() {
+    // if (!lostGame) {
+    //   moveTimer = setInterval(this.moveOnce.bind(this), 200)
+    //   lossTimer = setInterval(checkForLoss, 200)
+    // } else {
+    //   moveTimer = clearInterval(1)
+    //   lossTimer = clearInterval(lossTimer)
+    // }
+  //   moveTimer = setInterval(function() {
+  //     this.moveOnce.bind(this)
+  //     checkForLoss
+  //     if (lostGame) {
+  //       clearInterval(moveTimer)
+  //     }
+  //   }, 250)
+  // }
 }
 
 //*STATE VARIABLES
 let board = []
-let score, snake, apple, lostGame
+let score, snake, apple, lostGame, lossTimer,moveTimer
 
 //*CACHED ELEMENT REFERENCES
 
@@ -103,7 +116,7 @@ function render() {
   clearBoard()
   apple.display()
   snake.display()
-  snake.moveContinuously()
+  moveContinuously()
 }
 
 function generateBoardCells() {
@@ -196,7 +209,7 @@ function eatApple(popped) {
 }
 
 function checkForLoss(moveTimer) {
-  snake.coordinates.forEach(coordinate => {
+  snake.coordinates.forEach((coordinate, i)=> {
     if (coordinate.x < 1 || 
         coordinate.y < 1 ||
         coordinate.x > 20 ||
@@ -205,10 +218,34 @@ function checkForLoss(moveTimer) {
     } else {
       lostGame = false
     }
+    snake.coordinates.forEach((copy, j)=> {
+      if (coordinate.x === copy.x &&
+          coordinate.y === copy.y &&
+          i !== j) {
+        lostGame = true
+      }
+    })
   })
+}
+
+function moveContinuously() {
+  // if (!lostGame) {
+  //   moveTimer = setInterval(this.moveOnce.bind(this), 200)
+  //   lossTimer = setInterval(checkForLoss, 200)
+  // } else {
+  //   moveTimer = clearInterval(1)
+  //   lossTimer = clearInterval(lossTimer)
+  // }
+  moveTimer = setInterval(function() {
+    snake.moveOnce()
+    checkForLoss()
+    endGame()
+  }, 250)
+}
+
+function endGame() {
   if (lostGame) {
-    clearInterval(moveTimer)
-    clearInterval(lossTimer)
+    clearInterval(moveTimer())
   }
 }
 
