@@ -61,7 +61,7 @@ class Snake {
     this.display()
   }
   moveContinuously() {
-    const moveTimer = setInterval(this.moveOnce.bind(this), 150)
+    const moveTimer = setInterval(this.moveOnce.bind(this), 200)
   }
 }
 
@@ -121,13 +121,21 @@ function generateBoardCells() {
 
 function handleArrowKeydown(e) {
   if (e.key === 'ArrowUp') {
-    snake.direction = 'up'
+    if (snake.direction !== 'down') {
+      snake.direction = 'up'
+    }
   } else if (e.key === 'ArrowDown') {
-    snake.direction = 'down'
+    if (snake.direction !== 'up') {
+      snake.direction = 'down'
+    }
   } else if (e.key === 'ArrowRight') {
-    snake.direction = 'right'
+    if (snake.direction !== 'left') {
+      snake.direction = 'right'
+    }
   } else if (e.key === 'ArrowLeft') {
-    snake.direction = 'left'
+    if (snake.direction !== 'right') {
+      snake.direction = 'left'
+    }
   }
 }
 
