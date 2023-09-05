@@ -64,25 +64,21 @@ class Snake {
     this.coordinates.unshift(cloneHead)
     let popped = this.coordinates.pop()
     eatApple(popped)
-    clearBoard()
-    this.display()
   }
-  // moveContinuously() {
-    // if (!lostGame) {
-    //   moveTimer = setInterval(this.moveOnce.bind(this), 200)
-    //   lossTimer = setInterval(checkForLoss, 200)
-    // } else {
-    //   moveTimer = clearInterval(1)
-    //   lossTimer = clearInterval(lossTimer)
-    // }
-  //   moveTimer = setInterval(function() {
-  //     this.moveOnce.bind(this)
-  //     checkForLoss
-  //     if (lostGame) {
-  //       clearInterval(moveTimer)
-  //     }
-  //   }, 250)
-  // }
+  moveContinuously() {
+    moveTimer = setInterval(function(moveTimer) {
+      this.moveOnce()
+      checkForLoss()
+      if (lostGame) {
+        stopTimer()
+      }
+      clearBoard()
+      this.display()
+    }, 150)
+    function stopTimer() {
+      stopTimer = clearInterval(moveTimer)
+    }
+  }
 }
 
 //*STATE VARIABLES
@@ -108,15 +104,14 @@ function init() {
   score = 0
   snake = new Snake(10, 10)
   apple = new Apple()
+  generateBoardArray()
   render()
 }
 
 function render() {
-  generateBoardArray()
   clearBoard()
   apple.display()
-  snake.display()
-  moveContinuously()
+  moveContinuously(moveTimer)
 }
 
 function generateBoardCells() {
@@ -182,7 +177,7 @@ function randomIndex() {
 
 function clearBoard() {
   boardCellEls.forEach(cellEl => {
-    if (!cellEl.classList.contains('apple'))
+    if (!cellEl.classList.contains('apple') || lostGame === true)
     cellEl.className = 'cell'
 })
 }
@@ -229,25 +224,21 @@ function checkForLoss(moveTimer) {
 }
 
 function moveContinuously() {
-  // if (!lostGame) {
-  //   moveTimer = setInterval(this.moveOnce.bind(this), 200)
-  //   lossTimer = setInterval(checkForLoss, 200)
-  // } else {
-  //   moveTimer = clearInterval(1)
-  //   lossTimer = clearInterval(lossTimer)
-  // }
-  moveTimer = setInterval(function() {
+  moveTimer = setInterval(function(moveTimer) {
     snake.moveOnce()
     checkForLoss()
-    endGame()
-  }, 250)
-}
-
-function endGame() {
-  if (lostGame) {
-    clearInterval(moveTimer())
+    if (lostGame) {
+      stopTimer()
+    }
+    clearBoard()
+    snake.display()
+  }, 150)
+  function stopTimer() {
+    stopTimer = clearInterval(moveTimer)
   }
 }
+
+
 
 function displayResult() {
 }
