@@ -8,20 +8,20 @@ class Cell {
 
 class Apple {
   constructor() {
-    this.cell = this.createUniqueCoordinates()
+    this.coordinate = this.createUniqueCoordinates()
   }
   createUniqueCoordinates() {
-    const cell = new Cell(randomIndex(), randomIndex())
-    if (snake.coordinates.includes(cell)) {
+    const coordinate = new Cell(randomIndex(), randomIndex())
+    if (snake.coordinates.includes(coordinate)) {
       this.createUniqueCoordinates()
     } else {
-      return cell
+      return coordinate
     }
   }
   display() {
     boardCellEls.forEach(displayedCell => {
       const point = getCoordinates(displayedCell)
-      if (point.x === this.cell.x && point.y === this.cell.y) {
+      if (point.x === this.coordinate.x && point.y === this.coordinate.y) {
         displayedCell.className = 'apple'
       }
     })
@@ -58,17 +58,26 @@ class Snake {
     this.coordinates.unshift(cloneHead)
     this.coordinates.pop()
     clearBoard()
+    checkForLoss()
     this.display()
   }
   moveContinuously() {
     const moveTimer = setInterval(this.moveOnce.bind(this), 200)
+    const lossCheckTimer = setInterval(checkForLoss(moveTimer, lossCheckTimer), 200)
   }
+  // eatApple() {
+  //   this.coordinates.forEach(coordinate => {
+  //     if (coordinate.x === apple.coordinate.x && coordinate.y === apple.coordinate.y) {
+  //       snake.coordinates.push(apple)
+  //     }
+  //     apple = new Apple()
+  //   })
+  // }
 }
 
 //*STATE VARIABLES
 let board = []
-let tempArray = []
-let score, snake, apple
+let score, snake, apple, lostGame
 
 //*CACHED ELEMENT REFERENCES
 
@@ -86,6 +95,7 @@ document.addEventListener('keydown', handleArrowKeydown)
 init()
 
 function init() {
+  apple = null
   score = 0
   snake = new Snake(10, 10)
   apple = new Apple()
@@ -97,7 +107,7 @@ function render() {
   clearBoard()
   apple.display()
   snake.display()
-  // snake.moveContinuously()
+  snake.moveContinuously()
 }
 
 function generateBoardCells() {
@@ -182,15 +192,21 @@ function incrementScore(score) {
 function displayScore() {
 }
 
-function checkForLoss() {
+function checkForLoss(moveTimer, lossCheckTimer) {
   snake.coordinates.forEach(coordinate => {
     if (coordinate.x < 1 || 
         coordinate.y < 1 ||
         coordinate.x > 20 ||
         coordinate.y > 20) {
-      console.log('Game Over!')
+      lostGame = true
+    } else {
+      lostGame = false
     }
   })
+  if (lostGame) {
+    clearInterval(moveTimer)
+    clearInterval(lossCheckTimer)
+  }
 }
 
 function displayResult() {
@@ -201,4 +217,4 @@ function displayResult() {
 //*For running keydown event listeners
 // https://www.javascripttutorial.net/javascript-dom/javascript-keyboard-events/
 
-// https://stackoverflow.com/questions/56496376/get-previous-item-seen-in-js-for-of-loop
+//Jackson helped me reorganize my data, I was looping through everything too many times before
