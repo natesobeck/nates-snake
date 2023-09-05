@@ -62,10 +62,9 @@ class Snake {
       cloneHead.x += 1
     }
     this.coordinates.unshift(cloneHead)
-    this.coordinates.pop()
-    eatApple()
+    let popped = this.coordinates.pop()
+    eatApple(popped)
     clearBoard()
-    checkForLoss()
     this.display()
   }
   moveContinuously() {
@@ -183,10 +182,11 @@ function getCoordinates(displayedCell) {
   return newCell
 }
 
-function eatApple() {
+function eatApple(popped) {
   let appleClone = Object.assign({}, apple.coordinate)
   snake.coordinates.forEach(coordinate => {
     if (coordinate.x === appleClone.x && coordinate.y === appleClone.y) {
+      snake.coordinates.push(popped)
       apple.coordinate = apple.createUniqueCoordinates()
       apple.display()
       score += 10
@@ -195,7 +195,7 @@ function eatApple() {
   })
 }
 
-function checkForLoss(moveTimer, lossCheckTimer) {
+function checkForLoss(moveTimer) {
   snake.coordinates.forEach(coordinate => {
     if (coordinate.x < 1 || 
         coordinate.y < 1 ||
@@ -208,6 +208,7 @@ function checkForLoss(moveTimer, lossCheckTimer) {
   })
   if (lostGame) {
     clearInterval(moveTimer)
+    clearInterval(lossTimer)
   }
 }
 
