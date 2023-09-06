@@ -2,16 +2,18 @@ html {
   display: flex;
   text-align: center;
   justify-content: center;
-  background-color: green;
+  background-color: gray;
 }
 
 body {
   height: 85vmin;
   width: 85vmin;
-  max-width: 800px;
-  max-height: 800px;
+  max-width: 1000px;
+  max-height: 1000px;
+  min-width: 400px;
+  min-height: 400px;
   margin: 5vmin 0 0 5vmin;
-  background-color: gray;
+  background-color: green;
   position: relative;
 }
 
@@ -20,36 +22,72 @@ body {
   flex-direction: column;
   width: 90%;
   height: 80%;
-  position: absolute;
+  position: relative;
   left: 5%;
   top: 5%;
   background-color: darkslategray
 }
 
-#cpuScreenBorder {
+#cpu-screen-border {
   position: absolute;
   background-color: white;
+  height: 85%;
+  width: 90%;
+  left: 5%;
+  top: 5%;
 }
 
 #cpu-screen {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 100%;
   align-items: center;
   background-color: red;
+  position: relative;
   /* background-color:rgb(222, 184, 135, 80%);
   border-style:inset;
   border-radius: 5%; */
 }
 
+#reset-btn {
+  position: absolute;
+  right: 5%;
+  bottom: 2%;
+}
+
 #board {
+  position: absolute;
+  top: 2%;
+  height: 88%;
   width: 90%;
-  border-style: ridge;
-  border-color: rgb(50, 169, 86, 60%);
   display: grid;
   grid-template-columns: repeat(20, 5%);
   grid-template-rows: repeat(20, 5%);
   overflow: hidden;
+}
+
+#score-display {
+  position: absolute;
+  bottom: 2%;
+  font-size: 2rem;
+}
+
+#cpu-stand {
+  position: absolute;
+  height: 10%;
+  width: 5%;
+  bottom: 5%;
+  right: 47.5%;
+  background-color: magenta;
+}
+
+#cpu-stand-base {
+  position: absolute;
+  height: 5%;
+  width: 50%;
+  background-color:rgb(205, 92, 92);
+  bottom: 0;
+  right: 25%;
 }
 
 .snake {

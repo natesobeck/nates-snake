@@ -79,15 +79,14 @@ const boardCellEls = document.querySelectorAll('.cell')
 const scoreEl = document.getElementById('score-display')
 const startBtnEl = document.getElementById('reset-btn')
 
+
 //*EVENT LISTENERS
 
 document.addEventListener('keydown', handleArrowKeydown)
-startBtnEl.addEventListener('click', init)
+startBtnEl.addEventListener('click', resetGame)
 
 
 //*FUNCTIONS
-
-init()
 
 function init() {
   board = []
@@ -101,8 +100,7 @@ function render() {
   generateBoardArray()
   clearBoard()
   apple.display()
-  updateScore()
-  // moveContinuously(moveTimer)
+  moveContinuously(moveTimer)
 }
 
 function generateBoardCells() {
@@ -219,6 +217,7 @@ function checkForLoss(moveTimer) {
 
 function moveContinuously() {
   moveTimer = setInterval(function() {
+    startBtnEl.disabled = true
     snake.moveOnce()
     checkForLoss()
     clearBoard()
@@ -230,12 +229,20 @@ function moveContinuously() {
   }, 150)
   function stopTimer() {
     stopTimer = clearInterval(moveTimer)
+    startBtnEl.disabled = false
   }
 }
+
 function updateScore() {
   score += 10
-  scoreEl.textContent = `You have ${score === true ? score : 0} points.`
+  scoreEl.textContent = `SCORE: ${score ? score : 0}`
 }
+
+function resetGame() {
+  scoreEl.textContent = 'SCORE: 0'
+  init()
+}
+
 function displayResult() {
 }
 
