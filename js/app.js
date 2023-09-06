@@ -23,13 +23,8 @@ class Apple {
       const point = getCoordinates(displayedCell)
       if (point.x === this.coordinate.x && point.y === this.coordinate.y) {
         displayedCell.className = 'apple'
-      } else {
-        snake.coordinates.forEach(coordinate => {
-          if (point.x !== coordinate.x || point.y !== coordinate.y) {
-            displayedCell.className = 'cell'
-          }
-        })
-      }
+        displayedCell.textContent = '@'
+      } 
     })
   }
 }
@@ -46,7 +41,8 @@ class Snake {
       this.coordinates.forEach(coordinate => {
         if (point.x === coordinate.x && point.y === coordinate.y) {
           displayedCell.className = 'snake'
-        }
+          displayedCell.textContent = '*'
+        } 
       })
     })
   }
@@ -166,8 +162,10 @@ function randomIndex() {
 
 function clearBoard() {
   boardCellEls.forEach(cellEl => {
-    if (!cellEl.classList.contains('apple') || lostGame === true)
-    cellEl.className = 'cell'
+    if (!cellEl.classList.contains('apple') || lostGame === true) {
+      cellEl.textContent = ''
+      cellEl.className = 'cell'
+    }
 })
 }
 
@@ -255,3 +253,6 @@ function displayResult() {
 
 //*Wireframe
 //https://wireframe.cc/XR4iho
+
+//* Old school green computer text
+// https://superuser.com/questions/361297/what-colour-is-the-dark-green-on-old-fashioned-green-screen-computer-displays

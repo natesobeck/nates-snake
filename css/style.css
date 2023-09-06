@@ -13,7 +13,6 @@ body {
   min-width: 400px;
   min-height: 400px;
   margin: 5vmin 0 0 5vmin;
-  background-color: green;
   position: relative;
 }
 
@@ -25,12 +24,13 @@ body {
   position: relative;
   left: 5%;
   top: 5%;
-  background-color: darkslategray
+  background-color: beige;
+  border: 2px solid black;
+  border-radius: 5%;
 }
 
 #cpu-screen-border {
   position: absolute;
-  background-color: white;
   height: 85%;
   width: 90%;
   left: 5%;
@@ -42,11 +42,11 @@ body {
   flex-direction: column;
   height: 100%;
   align-items: center;
-  background-color: red;
+  background-color: rgb(35, 35, 35);
   position: relative;
-  /* background-color:rgb(222, 184, 135, 80%);
-  border-style:inset;
-  border-radius: 5%; */
+  border: 5px solid darkgray;
+  border-style: inset;
+  border-radius: 5%;
 }
 
 #reset-btn {
@@ -69,44 +69,48 @@ body {
 #score-display {
   position: absolute;
   bottom: 2%;
-  font-size: 2rem;
+  font-size: 1.7rem;
+  color: rgb(51, 255, 51, 0.8)
 }
 
 #cpu-stand {
   position: absolute;
   height: 10%;
   width: 5%;
-  bottom: 5%;
+  bottom: 4%;
   right: 47.5%;
-  background-color: magenta;
+  background-color: beige;
+  border: 2px solid black;
+  z-index: -1;
 }
 
 #cpu-stand-base {
   position: absolute;
   height: 5%;
   width: 50%;
-  background-color:rgb(205, 92, 92);
   bottom: 0;
   right: 25%;
+  border: 2px solid black;
+  background-color: beige;
 }
 
 .snake {
-  background-color: rgb(50, 169, 86);
-  border-radius: 25%;
-  border-style:ridge;
-  border-color: darkseagreen;
+  color: rgb(51, 255, 51, 0.8);
+  overflow: hidden;
+  font-size: 2rem;
+  text-justify: center;
+  text-align: center;
 }
 
 .cell {
-  border-style: ridge;
-  border-color: rgb(50, 169, 86, 60%);
+  border: 1px solid rgba(51, 255, 51, 0.8);
+  background-color: rgb(35, 35, 35);
+  overflow: hidden;
 }
 
 .apple {
-  background-color: rgb(139, 0, 0, 80%);
-  border-radius: 50%;
-  border-top-right-radius: 30%;
-  border-top-left-radius: 30%;
-  border-style: ridge;
-  border-color: rgb(205, 92, 92);
+  color: rgb(51, 255, 51, 0.8);
+  text-justify: center;
+  text-align: center;
+  font-size: 1.5rem;
 }
