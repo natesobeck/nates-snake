@@ -76,8 +76,8 @@ let score, snake, apple, lostGame, moveTimer
 const boardEl = document.getElementById('board')
 generateBoardCells()
 const boardCellEls = document.querySelectorAll('.cell')
-const scoreEl = document.getElementById('scoreDisplay')
-const startBtnEl = document.getElementById('startBtn')
+const scoreEl = document.getElementById('score-display')
+const startBtnEl = document.getElementById('reset-btn')
 
 //*EVENT LISTENERS
 
@@ -102,7 +102,7 @@ function render() {
   clearBoard()
   apple.display()
   updateScore()
-  moveContinuously(moveTimer)
+  // moveContinuously(moveTimer)
 }
 
 function generateBoardCells() {
@@ -201,6 +201,7 @@ function checkForLoss(moveTimer) {
         coordinate.y > 20) {
       lostGame = true
       clearBoard()
+      return
     } else {
       lostGame = false
     }
@@ -210,6 +211,7 @@ function checkForLoss(moveTimer) {
           i !== j) {
         lostGame = true
         clearBoard()
+        return
       }
     })
   })
@@ -219,11 +221,12 @@ function moveContinuously() {
   moveTimer = setInterval(function() {
     snake.moveOnce()
     checkForLoss()
+    clearBoard()
     if (lostGame) {
       stopTimer()
+    } else {
+      snake.display()
     }
-    clearBoard()
-    snake.display()
   }, 150)
   function stopTimer() {
     stopTimer = clearInterval(moveTimer)
@@ -242,3 +245,6 @@ function displayResult() {
 // https://www.javascripttutorial.net/javascript-dom/javascript-keyboard-events/
 
 //Jackson helped me reorganize my data, I was looping through everything too many times before
+
+//*Wireframe
+//https://wireframe.cc/XR4iho

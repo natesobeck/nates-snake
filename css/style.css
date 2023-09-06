@@ -2,31 +2,47 @@ html {
   display: flex;
   text-align: center;
   justify-content: center;
+  background-color: green;
 }
 
 body {
-  height: 80vmin;
-  width: 80vmin;
+  height: 85vmin;
+  width: 85vmin;
   max-width: 800px;
   max-height: 800px;
   margin: 5vmin 0 0 5vmin;
-  background-color: rgb(95, 158, 160, 50%);
+  background-color: gray;
+  position: relative;
 }
 
-#gameContainer {
-  height: 100%;
-  width: 100%;
+#cpu-body {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 80%;
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  background-color: darkslategray
+}
+
+#cpuScreenBorder {
+  position: absolute;
+  background-color: white;
+}
+
+#cpu-screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color:rgb(222, 184, 135, 80%);
+  background-color: red;
+  /* background-color:rgb(222, 184, 135, 80%);
   border-style:inset;
-  border-radius: 5%;
+  border-radius: 5%; */
 }
 
 #board {
-  height: 90%;
   width: 90%;
   border-style: ridge;
   border-color: rgb(50, 169, 86, 60%);
@@ -55,9 +71,4 @@ body {
   border-top-left-radius: 30%;
   border-style: ridge;
   border-color: rgb(205, 92, 92);
-}
-
-#scoreDisplay {
-  width: 15vmin,
-  height: 5vmin,
 }
