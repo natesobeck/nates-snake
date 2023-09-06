@@ -65,25 +65,11 @@ class Snake {
     let popped = this.coordinates.pop()
     eatApple(popped)
   }
-  moveContinuously() {
-    moveTimer = setInterval(function(moveTimer) {
-      this.moveOnce()
-      checkForLoss()
-      if (lostGame) {
-        stopTimer()
-      }
-      clearBoard()
-      this.display()
-    }, 150)
-    function stopTimer() {
-      stopTimer = clearInterval(moveTimer)
-    }
-  }
 }
 
 //*STATE VARIABLES
 let board = []
-let score, snake, apple, lostGame, lossTimer,moveTimer
+let score, snake, apple, lostGame, moveTimer
 
 //*CACHED ELEMENT REFERENCES
 
@@ -91,16 +77,20 @@ const boardEl = document.getElementById('board')
 generateBoardCells()
 const boardCellEls = document.querySelectorAll('.cell')
 const scoreEl = document.getElementById('score-display')
+const startBtnEl = document.getElementById('start-btn')
 
 //*EVENT LISTENERS
 
 document.addEventListener('keydown', handleArrowKeydown)
+startBtnEl.addEventListener('click', init)
+
 
 //*FUNCTIONS
 
 init()
 
 function init() {
+  board = []
   score = 0
   snake = new Snake(10, 10)
   apple = new Apple()
@@ -210,6 +200,7 @@ function checkForLoss(moveTimer) {
         coordinate.x > 20 ||
         coordinate.y > 20) {
       lostGame = true
+      clearBoard()
     } else {
       lostGame = false
     }
@@ -218,13 +209,14 @@ function checkForLoss(moveTimer) {
           coordinate.y === copy.y &&
           i !== j) {
         lostGame = true
+        clearBoard()
       }
     })
   })
 }
 
 function moveContinuously() {
-  moveTimer = setInterval(function(moveTimer) {
+  moveTimer = setInterval(function() {
     snake.moveOnce()
     checkForLoss()
     if (lostGame) {
@@ -238,8 +230,9 @@ function moveContinuously() {
   }
 }
 
-
-
+function updateScore() {
+  scoreEl.textContent = `${score}`
+}
 function displayResult() {
 }
 

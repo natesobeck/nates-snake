@@ -5,8 +5,8 @@ html {
 }
 
 body {
-  height: 90vmin;
-  width: 90vmin;
+  height: 80vmin;
+  width: 80vmin;
   max-width: 800px;
   max-height: 800px;
   margin: 5vmin 0 0 5vmin;
@@ -28,7 +28,7 @@ body {
 #board {
   height: 90%;
   width: 90%;
-  border-style:ridge;
+  border-style: ridge;
   border-color: rgb(50, 169, 86, 60%);
   display: grid;
   grid-template-columns: repeat(20, 5%);
