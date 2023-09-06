@@ -76,8 +76,8 @@ let score, snake, apple, lostGame, moveTimer
 const boardEl = document.getElementById('board')
 generateBoardCells()
 const boardCellEls = document.querySelectorAll('.cell')
-const scoreEl = document.getElementById('score-display')
-const startBtnEl = document.getElementById('start-btn')
+const scoreEl = document.getElementById('scoreDisplay')
+const startBtnEl = document.getElementById('startBtn')
 
 //*EVENT LISTENERS
 
@@ -94,13 +94,14 @@ function init() {
   score = 0
   snake = new Snake(10, 10)
   apple = new Apple()
-  generateBoardArray()
   render()
 }
 
 function render() {
+  generateBoardArray()
   clearBoard()
   apple.display()
+  updateScore()
   moveContinuously(moveTimer)
 }
 
@@ -187,8 +188,7 @@ function eatApple(popped) {
       snake.coordinates.push(popped)
       apple.coordinate = apple.createUniqueCoordinates()
       apple.display()
-      score += 10
-      console.log(score)
+      updateScore()
     }
   })
 }
@@ -229,9 +229,9 @@ function moveContinuously() {
     stopTimer = clearInterval(moveTimer)
   }
 }
-
 function updateScore() {
-  scoreEl.textContent = `${score}`
+  score += 10
+  scoreEl.textContent = `You have ${score === true ? score : 0} points.`
 }
 function displayResult() {
 }

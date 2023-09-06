@@ -13,7 +13,7 @@ body {
   background-color: rgb(95, 158, 160, 50%);
 }
 
-#game-container {
+#gameContainer {
   height: 100%;
   width: 100%;
   display: flex;
@@ -57,9 +57,7 @@ body {
   border-color: rgb(205, 92, 92);
 }
 
-/* #score-display {
-  margin: 10px;
-  height: 30px;
-  width: 130px;
-  border: 1px solid black;
-} */
+#scoreDisplay {
+  width: 15vmin,
+  height: 5vmin,
+}
