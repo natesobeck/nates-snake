@@ -74,7 +74,7 @@ generateBoardCells()
 const boardCellEls = document.querySelectorAll('.cell')
 const scoreEl = document.getElementById('score-display')
 const startBtnEl = document.getElementById('start-btn')
-
+const cpuScreenEl = document.getElementById('cpu-screen')
 
 //*EVENT LISTENERS
 
@@ -89,6 +89,7 @@ function init() {
   score = 0
   snake = new Snake(10, 10)
   apple = new Apple()
+  lostGame = false
   render()
 }
 
@@ -97,7 +98,7 @@ function render() {
   clearBoard()
   apple.display()
   snake.display()
-  // moveContinuously(moveTimer)
+  moveContinuously(moveTimer)
 }
 
 function generateBoardCells() {
@@ -150,7 +151,7 @@ function generateBoardArray() {
       if (j < 10) {
         y = y.padStart(2, 0)
       }
-      let cell = new Cell (x, y, false, false, false, 'left')
+      let cell = new Cell (x, y)
       board.push(cell)
     }
   }
@@ -197,6 +198,7 @@ function checkForLoss(moveTimer) {
         coordinate.x > 20 ||
         coordinate.y > 20) {
       lostGame = true
+      displayResult()
       clearBoard()
       return
     } else {
@@ -207,6 +209,7 @@ function checkForLoss(moveTimer) {
           coordinate.y === copy.y &&
           i !== j) {
         lostGame = true
+        displayResult()
         clearBoard()
         return
       }
@@ -235,14 +238,35 @@ function moveContinuously() {
 function updateScore() {
   score += 10
   scoreEl.textContent = `SCORE: ${score ? score : 0}`
+
 }
 
 function resetGame() {
+  resetHtml()
   scoreEl.textContent = 'SCORE: 0'
   init()
 }
 
 function displayResult() {
+  if (lostGame) {
+    cpuScreenEl.innerHTML = `
+    <div id='game-over-container'>
+      <div id='game-over-message'></div>
+      </br>
+      <div id='final-score'></div>
+      </br>
+      <div id='play-again'></div>
+    </div>`
+    document.getElementById('game-over-message').textContent = `GAME OVER`
+    document.getElementById('final-score').textContent = `FINAL SCORE: ${score}`
+    document.getElementById('play-again').textContent = `PRESS ENTER TO PLAY AGAIN`
+  }
+}
+
+function resetHtml() {
+  cpuScreenEl.innerHTML = `
+    <div id="board"></div>
+    <div id="score-display"></div>`
 }
 
 //*SOURCES

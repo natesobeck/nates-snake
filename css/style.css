@@ -99,6 +99,20 @@ body {
   background-color: beige;
 }
 
+#game-over-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:rgba(51, 255, 51, 0.8);
+  font-size: 1.5rem;
+}
+
+#play-again {
+  font-size: 1.2rem;
+}
 
 .snake {
   color: rgb(51, 255, 51, 0.8);
@@ -117,8 +131,6 @@ body {
 .apple {
   color: rgb(51, 255, 51, 0.8);
   text-justify: center;
-  border: 2px solid darkgray;
-  border-style: inset;
   text-align: center;
   font-size: 1.5rem;
   font-family: 'Courier Prime', monospace;

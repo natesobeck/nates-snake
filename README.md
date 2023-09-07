@@ -5,7 +5,7 @@
 ![A screenshot of the RETRO SNAKE game.](../../../../Desktop/Pictures/RETRO-SNAKE-screenshot-for-README.jpg)
 ---
 Let's go back to the 80's for a bit. This was one of the first computer games that I ever played, and I'm sure that's true for a lot of people. I wanted to bring back that old-school feel. It is a complete recreation of the game that's been played for almost 40 years. Plus, don't you want to know if you're better than you were back then?
-f
+
 The game functions exactly as the original. You want to make your snake as long as possible! How do snakes grow longer? By eating apples, obviously. But be careful, it's game over when the snake hits itself or the boundary. 10 points a pop for the apples.
 
 Can you gorge yourself on enough to fill the entire screen and get hundreds of points?
