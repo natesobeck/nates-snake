@@ -73,7 +73,7 @@ const boardEl = document.getElementById('board')
 generateBoardCells()
 const boardCellEls = document.querySelectorAll('.cell')
 const scoreEl = document.getElementById('score-display')
-const startBtnEl = document.getElementById('reset-btn')
+const startBtnEl = document.getElementById('start-btn')
 
 
 //*EVENT LISTENERS
@@ -96,7 +96,8 @@ function render() {
   generateBoardArray()
   clearBoard()
   apple.display()
-  moveContinuously(moveTimer)
+  snake.display()
+  // moveContinuously(moveTimer)
 }
 
 function generateBoardCells() {
