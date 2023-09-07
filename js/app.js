@@ -242,7 +242,7 @@ function updateScore() {
 }
 
 function resetGame() {
-  resetHtml()
+  // resetHtml()
   scoreEl.textContent = 'SCORE: 0'
   init()
 }
