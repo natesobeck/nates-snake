@@ -1,8 +1,8 @@
 
 
-## RETRO SNAKE
+## SNAKE: 80's Edition
 
-![A screenshot of the RETRO SNAKE game.](./assets.js/RETRO-SNAKE-screenshot-for-README.jpg)
+![A screenshot of the SNAKE: 80's Edition game.](./assets.js/RETRO-SNAKE-screenshot-for-README.jpg)
 
 ---
 Let's go back to the 80's for a bit. This was one of the first computer games that I ever played, and I'm sure that's true for a lot of people. I wanted to bring back that old-school feel. It is a complete recreation of the game that's been played for almost 40 years. Plus, don't you want to know if you're better than you were back then?
@@ -11,7 +11,7 @@ The game functions exactly as the original. You want to make your snake as long 
 
 Can you gorge yourself on enough to fill the entire screen and get hundreds of points? Will you grow big enough to devour the world? Or will you stay a garden snake? Find out below!
 
-### [Play Retro Snake](https://nate-snake.netlify.app/)
+### [Play SNAKE: 80's Edition](https://nate-snake.netlify.app/)
 
 ---
 ### Technical requirements:
