@@ -69,12 +69,12 @@ let score, snake, apple, lostGame, moveTimer
 
 //*CACHED ELEMENT REFERENCES
 
-const boardEl = document.getElementById('board')
+let boardEl = document.getElementById('board')
 generateBoardCells()
-const boardCellEls = document.querySelectorAll('.cell')
-const scoreEl = document.getElementById('score-display')
-const startBtnEl = document.getElementById('start-btn')
-const cpuScreenEl = document.getElementById('cpu-screen')
+let boardCellEls = document.querySelectorAll('.cell')
+let scoreEl = document.getElementById('score-display')
+let startBtnEl = document.getElementById('start-btn')
+let cpuScreenEl = document.getElementById('cpu-screen')
 
 //*EVENT LISTENERS
 
@@ -86,6 +86,8 @@ startBtnEl.addEventListener('click', resetGame)
 
 function init() {
   board = []
+  generateBoardCells()
+  boardCellEls = document.querySelectorAll('.cell')
   score = 0
   snake = new Snake(10, 10)
   apple = new Apple()
@@ -95,7 +97,6 @@ function init() {
 
 function render() {
   generateBoardArray()
-  clearBoard()
   apple.display()
   snake.display()
   moveContinuously(moveTimer)
@@ -242,7 +243,9 @@ function updateScore() {
 }
 
 function resetGame() {
-  // resetHtml()
+  resetHtml()
+  boardEl = document.getElementById('board')
+  scoreEl = document.getElementById('score-display')
   scoreEl.textContent = 'SCORE: 0'
   init()
 }
