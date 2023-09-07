@@ -64,6 +64,7 @@ class Snake {
 }
 
 //*STATE VARIABLES
+
 let board = []
 let score, snake, apple, lostGame, moveTimer
 
@@ -73,8 +74,8 @@ let boardEl = document.getElementById('board')
 generateBoardCells()
 let boardCellEls = document.querySelectorAll('.cell')
 let scoreEl = document.getElementById('score-display')
-let startBtnEl = document.getElementById('start-btn')
-let cpuScreenEl = document.getElementById('cpu-screen')
+const startBtnEl = document.getElementById('start-btn')
+const cpuScreenEl = document.getElementById('cpu-screen')
 
 //*EVENT LISTENERS
 
@@ -271,16 +272,3 @@ function resetHtml() {
     <div id="board"></div>
     <div id="score-display"></div>`
 }
-
-//*SOURCES
-
-//*For running keydown event listeners
-// https://www.javascripttutorial.net/javascript-dom/javascript-keyboard-events/
-
-//Jackson helped me reorganize my data, I was looping through everything too many times before
-
-//*Wireframe
-//https://wireframe.cc/XR4iho
-
-//* Old school green computer text
-// https://superuser.com/questions/361297/what-colour-is-the-dark-green-on-old-fashioned-green-screen-computer-displays
