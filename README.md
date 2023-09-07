@@ -2,7 +2,7 @@
 
 ## SNAKE: 80's Edition
 
-![A screenshot of the SNAKE: 80's Edition game.](./assets.js/RETRO-SNAKE-screenshot-for-README.jpg)
+![A screenshot of the SNAKE: 80's Edition game.](./assets/RETRO-SNAKE-screenshot-for-README.jpg)
 
 ---
 Let's go back to the 80's for a bit. This was one of the first computer games that I ever played, and I'm sure that's true for a lot of people. I wanted to bring back that old-school feel. It is a complete recreation of the game that's been played for almost 40 years. Plus, don't you want to know if you're better than you were back then?

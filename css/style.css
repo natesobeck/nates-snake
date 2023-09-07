@@ -59,6 +59,7 @@ body {
   border-radius: 30%;
   background-color: beige;
   font-family: 'Courier Prime', monospace;
+  font-size: 2vmin;
 }
 
 #board {
@@ -75,7 +76,7 @@ body {
 #score-display {
   position: absolute;
   bottom: 2%;
-  font-size: 1.7rem;
+  font-size: 3.5vmin;
   color: rgb(51, 255, 51, 0.8)
 }
 
@@ -108,11 +109,7 @@ body {
   justify-content: center;
   align-items: center;
   color:rgba(51, 255, 51, 0.8);
-  font-size: 1.5rem;
-}
-
-#play-again {
-  font-size: 1.2rem;
+  font-size: 3vmin;
 }
 
 #start-game-container {
@@ -122,6 +119,18 @@ body {
   align-items: center;
 }
 
+h2.start {
+  font-size: 5vmin;
+}
+
+#game-over-message {
+  font-size: 5vmin;
+}
+
+#start-game-msg {
+  font-size: 3vmin;
+}
+
 .start {
   color:rgba(51, 255, 51, 0.8);
 }
@@ -129,7 +138,7 @@ body {
 .snake {
   color: rgb(51, 255, 51, 0.8);
   overflow: hidden;
-  font-size: 2rem;
+  font-size: 3vmin;
   text-justify: center;
   text-align: center;
 }
@@ -144,6 +153,6 @@ body {
   color: rgb(51, 255, 51, 0.8);
   text-justify: center;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 3vmin;
   font-family: 'Courier Prime', monospace;
 }

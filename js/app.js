@@ -282,7 +282,7 @@ function startScreen() {
     <div id='start-game-msg' class='start'></div>`
   startGameEl = document.getElementById('start-game')
   startGameMsgEl = document.getElementById('start-game-msg')
-  startGameEl.textContent = 'RETRO SNAKE'
+  startGameEl.textContent = 'SNAKE: 80\'s Edition'
   startGameMsgEl.textContent = 'PRESS START BUTTON OR ENTER TO BEGIN'
   document.addEventListener('keydown', handleEnterKeydown)
 }
