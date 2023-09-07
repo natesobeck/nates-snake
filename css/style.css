@@ -42,6 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: center;
   align-items: center;
   background-color: rgb(35, 35, 35);
   position: relative;
@@ -57,7 +58,7 @@ body {
   height: 5%;
   border-radius: 30%;
   background-color: beige;
-  font-family: 
+  font-family: 'Courier Prime', monospace;
 }
 
 #board {
@@ -112,6 +113,17 @@ body {
 
 #play-again {
   font-size: 1.2rem;
+}
+
+#start-game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start {
+  color:rgba(51, 255, 51, 0.8);
 }
 
 .snake {

@@ -66,13 +66,11 @@ class Snake {
 //*STATE VARIABLES
 
 let board = []
-let score, snake, apple, lostGame, moveTimer
+let score, snake, apple, lostGame, moveTimer, boardCellEls
 
 //*CACHED ELEMENT REFERENCES
 
 let boardEl = document.getElementById('board')
-generateBoardCells()
-let boardCellEls = document.querySelectorAll('.cell')
 let scoreEl = document.getElementById('score-display')
 const startBtnEl = document.getElementById('start-btn')
 const cpuScreenEl = document.getElementById('cpu-screen')
@@ -85,8 +83,11 @@ startBtnEl.addEventListener('click', resetGame)
 
 //*FUNCTIONS
 
+startScreen()
+
 function init() {
   board = []
+  document.removeEventListener('keydown', handleEnterKeydown)
   generateBoardCells()
   boardCellEls = document.querySelectorAll('.cell')
   score = 0
@@ -264,6 +265,7 @@ function displayResult() {
     document.getElementById('game-over-message').textContent = `GAME OVER`
     document.getElementById('final-score').textContent = `FINAL SCORE: ${score}`
     document.getElementById('play-again').textContent = `PRESS ENTER TO PLAY AGAIN`
+    document.addEventListener('keydown', handleEnterKeydown)
   }
 }
 
@@ -271,4 +273,22 @@ function resetHtml() {
   cpuScreenEl.innerHTML = `
     <div id="board"></div>
     <div id="score-display"></div>`
+}
+
+function startScreen() {
+  cpuScreenEl.innerHTML = `
+    <h2 id='start-game' class='start'></h2>
+    </br>
+    <div id='start-game-msg' class='start'></div>`
+  startGameEl = document.getElementById('start-game')
+  startGameMsgEl = document.getElementById('start-game-msg')
+  startGameEl.textContent = 'RETRO SNAKE'
+  startGameMsgEl.textContent = 'PRESS START BUTTON OR ENTER TO BEGIN'
+  document.addEventListener('keydown', handleEnterKeydown)
+}
+
+function handleEnterKeydown(e) {
+  if (e.key === 'Enter') {
+    resetGame()
+  }
 }
