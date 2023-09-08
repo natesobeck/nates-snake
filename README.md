@@ -28,6 +28,7 @@ Can you gorge yourself on enough to fill the entire screen and get hundreds of p
 2. Big thanks for the retro green font color found in the top answer of the post [here](https://superuser.com/questions/361297/what-colour-is-the-dark-green-on-old-fashioned-green-screen-computer-displays)
 3. Used Google Fonts for [Courier Prime](https://fonts.google.com/specimen/Courier+Prime)
 4. Another big thanks to [Feydi Montasar](https://www.artstation.com/artwork/Xn6E0y) for the beautiful favicon
+5. Finally, thanks for the wonderful Charlie Brown background pattern from [Hero Patterns](https://heropatterns.com/)
 
 ---
 ### Planned future enhancements:
